@@ -1,11 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  hola
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Título{% endblock title %}
+{% block body %}
+{% if user.is_authenticated %}
+<p>hola, haz click aquí para <a href="{% url "login" %}">crear un nuevo Echo</a></p>
+{% else %}
+<p><a href="{% url "echos:add-echo" %}">Inicia sesión</a> para rear un nuevo Echo</p>
+{% endif %}
+
+{% for echo in echos %}
+<div class="echo">
+  {{echo.user}}
+  <p>{{echo.content}}<br>
+  </p>
+</div>
+{% endfor %}
+{% endblock body %}
