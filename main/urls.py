@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
+import accounts.views
 
 urlpatterns = [
     path('', lambda _: redirect('echos:home')),
     path('admin/', admin.site.urls),
     path('echos/', include('echos.urls')),
     path('login/', LoginView.as_view(), name='login'),
+    path('signup/', accounts.views.user_signup, name='signup'),
+    path('logout/', accounts.views.user_logout, name='logout'),
 ]
