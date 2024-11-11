@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Título{% endblock title %}
+{% block body %}
+{% if user.is_authenticated %}
+<p>hola, haz click aquí para <a href="{% url "echos:add-echo" %}">crear un nuevo Echo </a>|<a href="{% url 'logout' %}"> Logout</a></p>
+{% else %}
+<p><a href="{% url "login" %}">Inicia sesión</a> para crear un nuevo Echo | ¿No tienes cuenta? <a href="{% url 'signup' %}">Create una</a></p>
+{% endif %}
+<div class="echos">
+  {% for echo in echos %}
+  <a class="text-decoration-none primary text-primary-emphasis" href="{% url "echos:echo-detail" echo.pk %}">
+    <div class="echo border">
+      {{echo.user}}, {{echo.created_at}}
+      <p>{{echo.content}}<br>
+      </p>
+    </div>
+  </a>
+</div>
+{% endfor %}
+{% endblock body %}
