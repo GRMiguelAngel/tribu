@@ -7,3 +7,4 @@ class AddEchoForm(forms.ModelForm):
     class Meta:
         model = Echo
         fields = ('content',)
+

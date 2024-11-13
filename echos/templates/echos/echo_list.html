@@ -12,7 +12,7 @@
   <a class="text-decoration-none primary text-primary-emphasis" href="{% url "echos:echo-detail" echo.pk %}">
     <div class="echo border">
       {{echo.user}}, {{echo.created_at}}
-      <p>{{echo.content}}<br>
+      <p>{{echo.content|truncatewords:20}}
       </p>
     </div>
   </a>
