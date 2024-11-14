@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
 import accounts.views
+import waves.views
 
 urlpatterns = [
     path('', lambda _: redirect('echos:echo-list')),
@@ -26,4 +27,5 @@ urlpatterns = [
     path('login/', accounts.views.user_login, name='login'),
     path('signup/', accounts.views.user_signup, name='signup'),
     path('logout/', accounts.views.user_logout, name='logout'),
+    path('waves/', waves.views)
 ]

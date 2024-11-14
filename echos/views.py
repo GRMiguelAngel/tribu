@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 
 from waves.forms import AddWaveForm
 
-from .forms import AddEchoForm
+from .forms import AddEchoForm, EditEchoForm
 from .models import Echo
 
 # Create your views here.
@@ -25,9 +25,14 @@ def add_echo(request):
     return render(request, 'echos/add_echo.html', dict(form=form))
 
 
-def echo_detail(request, echo_id, show_all_waves:bool = False):
+def edit_echo(request):
+    if request.method == 'POST':
+        if (form := EditEchoForm(request.POST)).is_valid():
+
+
+def echo_detail(request, echo_id):
     echo = Echo.objects.get(id=echo_id)
-    waves = echo.waves.all() if show_all_waves else echo.waves.all()[:5]
+    waves = echo.waves.all()[:5]
     return render(request, 'echos/echo_detail.html', dict(echo=echo, waves=waves))
 
 
@@ -40,5 +45,11 @@ def add_wave(request, echo_id):
             form.save()
             return redirect('echos:echo-detail', echo_id)
     else:
-        form = AddEchoForm()
+        form = AddWaveForm()
     return render(request, 'waves/add_wave.html', dict(form=form))
+
+
+def echo_wave_list(request, echo_id):
+    echo = Echo.objects.get(id=echo_id)
+    waves = echo.waves.all()
+    return render(request, 'echos/echo_detail.html', dict(echo=echo, waves=waves))
