@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+user: {{echo.user}}<br>
+content: {{echo.content}}<br><br><br>
+
+{% for wave in waves %}
+<div>{{wave.user}}:{{wave.content}}</div>
+{% endfor %}
+
+<a href="{% url "echos:echo-detail" echo.pk True %}">Publicar wave</a>
+<a href="{% url "echos:add-wave" echo.pk %}">Publicar wave</a>
+{% endblock body %}

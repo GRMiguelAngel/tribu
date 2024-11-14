@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'echos.apps.EchosConfig',
     'waves.apps.WavesConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
