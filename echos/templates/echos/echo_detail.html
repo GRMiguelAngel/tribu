@@ -7,6 +7,6 @@ content: {{echo.content}}<br><br><br>
 <div>{{wave.user}}:{{wave.content}}</div>
 {% endfor %}
 
-<a href="{% url "echos:echo-detail" echo.pk True %}">Publicar wave</a>
+<a href="{% url "echos:echo-detail" echo_id=echo.pk show_all_waves=True%}">mostrar todos los waves</a><br>
 <a href="{% url "echos:add-wave" echo.pk %}">Publicar wave</a>
 {% endblock body %}

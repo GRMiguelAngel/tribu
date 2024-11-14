@@ -25,9 +25,9 @@ def add_echo(request):
     return render(request, 'echos/add_echo.html', dict(form=form))
 
 
-def echo_detail(request, echo_id, all_waves=False):
+def echo_detail(request, echo_id, show_all_waves:bool = False):
     echo = Echo.objects.get(id=echo_id)
-    waves = echo.waves.all() if all_waves else echo.waves.all()[:5]
+    waves = echo.waves.all() if show_all_waves else echo.waves.all()[:5]
     return render(request, 'echos/echo_detail.html', dict(echo=echo, waves=waves))
 
 
