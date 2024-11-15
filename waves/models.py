@@ -15,5 +15,7 @@ class Wave(models.Model):
         'echos.Echo',
         related_name='waves',
         on_delete=models.CASCADE,
-        null=True
     )
+
+    class Meta:
+        ordering = ['-created_at']

@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-
+from django.http import HttpResponse
 from waves.forms import AddWaveForm
 
 from .forms import AddEchoForm, EditEchoForm
@@ -25,9 +25,21 @@ def add_echo(request):
     return render(request, 'echos/add_echo.html', dict(form=form))
 
 
-def edit_echo(request):
+def edit_echo(request, echo_id: str):
+    echo = Echo.objects.get(id=echo_id)
+
     if request.method == 'POST':
-        if (form := EditEchoForm(request.POST)).is_valid():
+        if (form := EditEchoForm(request.POST, instance=echo)).is_valid():
+            echo = form.save(commit=False)
+            echo.user = request.user
+            echo.save()
+            return redirect('echos:echo-detail', echo.pk)
+    else:
+        if request.user == echo.user:
+            return HttpResponse(status_code=403)
+        form = EditEchoForm(instance=echo)
+
+    return render(request, 'echos/edit_echo.html', dict(echo=echo, form=form))
 
 
 def echo_detail(request, echo_id):

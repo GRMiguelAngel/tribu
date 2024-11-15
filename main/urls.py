@@ -27,5 +27,5 @@ urlpatterns = [
     path('login/', accounts.views.user_login, name='login'),
     path('signup/', accounts.views.user_signup, name='signup'),
     path('logout/', accounts.views.user_logout, name='logout'),
-    path('waves/', waves.views)
+    # path('waves/', include('waves.urls'))
 ]

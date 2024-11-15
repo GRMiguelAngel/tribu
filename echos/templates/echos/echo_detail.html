@@ -8,5 +8,8 @@ content: {{echo.content}}<br><br><br>
 {% endfor %}
 <a href="{% url "echos:echo-list" %}">Volver a echo-list</a><br>
 <a href="{% url "echos:wave-list" echo.pk %}">mostrar todos los waves</a><br>
-<a href="{% url "echos:add-wave" echo.pk %}">Publicar wave</a>
+<a href="{% url "echos:add-wave" echo.pk %}">Publicar wave</a><br>
+{% if echo.user == user %}
+<a href="{% url "echos:edit-echo" echo.pk %}">Editar echo</a>
+{% endif %}
 {% endblock body %}
