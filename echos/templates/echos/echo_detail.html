@@ -11,5 +11,6 @@ content: {{echo.content}}<br><br><br>
 <a href="{% url "echos:add-wave" echo.pk %}">Publicar wave</a><br>
 {% if echo.user == user %}
 <a href="{% url "echos:edit-echo" echo.pk %}">Editar echo</a>
+<a href="{% url "echos:delete-echo" echo.pk %}">eliminar echo</a>
 {% endif %}
 {% endblock body %}

@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
+from users.models import Profile
 from .forms import LoginForm, SignupForm
 
 
@@ -40,7 +41,9 @@ def user_login(request):
 def user_signup(request):
     if request.method == 'POST':
         if (form := SignupForm(request.POST)).is_valid():
+            
             user = form.save()
+            Profile.objects.create(user=user)
 
             login(request, user)
 
