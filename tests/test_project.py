@@ -254,6 +254,8 @@ def test_echo_detail(client, echo, user, fake):
     assertContains(response, echo.user.username)
     assertContains(response, ALL_WAVES_URL)
     sliced_waves = waves[:5]
+    print(response.content.decode())
+
     for wave in sliced_waves:
         assertContains(response, wave.content, count=1)
         assertContains(response, wave.user.username)

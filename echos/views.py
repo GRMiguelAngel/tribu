@@ -8,7 +8,7 @@ from .forms import AddEchoForm, EditEchoForm
 from .models import Echo
 
 # Create your views here.
-
+forbidden_msg = 'No tienes permiso para acceder a esta página.'
 
 @login_required
 def echo_list(request):
@@ -32,9 +32,8 @@ def add_echo(request):
 @login_required
 def edit_echo(request, echo_id: str):
     echo = Echo.objects.get(id=echo_id)
-    print(request.user, echo.user)
     if request.user != echo.user:
-        return HttpResponseForbidden('nono no puedes')
+        return HttpResponseForbidden(forbidden_msg)
 
     if request.method == 'POST':
         if (form := EditEchoForm(request.POST, instance=echo)).is_valid():
@@ -52,6 +51,8 @@ def edit_echo(request, echo_id: str):
 @login_required
 def delete_echo(request, echo_id):
     echo = Echo.objects.get(id=echo_id)
+    if request.user != echo.user:
+        return HttpResponseForbidden(forbidden_msg)
     echo.delete()
     return render(request, 'echos/delete_echo.html', dict(echo=echo))
 
@@ -80,5 +81,5 @@ def add_wave(request, echo_id):
 @login_required
 def echo_wave_list(request, echo_id):
     echo = Echo.objects.get(id=echo_id)
-    waves = echo.waves.all()
+    waves = echo.waves.all().order_by('-created_at')
     return render(request, 'echos/echo_detail.html', dict(echo=echo, waves=waves))

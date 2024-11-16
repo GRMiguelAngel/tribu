@@ -14,11 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
 from django.shortcuts import redirect
+from django.urls import include, path
+
 import accounts.views
-import waves.views
 
 urlpatterns = [
     path('', lambda _: redirect('echos:echo-list')),
@@ -27,5 +30,6 @@ urlpatterns = [
     path('login/', accounts.views.user_login, name='login'),
     path('signup/', accounts.views.user_signup, name='signup'),
     path('logout/', accounts.views.user_logout, name='logout'),
-    # path('waves/', include('waves.urls'))
-]
+    path('waves/', include('waves.urls')),
+    path('users/', include('users.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,7 +3,8 @@
 {% block title %}Título{% endblock title %}
 {% block body %}
 {% if user.is_authenticated %}
-<p>hola, haz click aquí para <a href="{% url "echos:add-echo" %}">crear un nuevo Echo </a>|<a href="{% url 'logout' %}"> Logout</a></p>
+<p>hola {{ user }}, haz click aquí para <a href="{% url "echos:add-echo" %}">crear un nuevo Echo </a>|<a href="{% url 'logout' %}"> Logout</a></p>
+<a href="{% url "users:profile-list" %}">Ver usuarios</a>
 {% else %}
 <p><a href="{% url "login" %}">Inicia sesión</a> para crear un nuevo Echo | ¿No tienes cuenta? <a href="{% url 'signup' %}">Create una</a></p>
 {% endif %}
