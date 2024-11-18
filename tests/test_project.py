@@ -514,7 +514,7 @@ def test_user_list(client, user, django_user_model):
 
 
     for user in users:
-        print(user)
+        print(users)
         assertContains(response, user)
         assertContains(response, USER_DETAIL_URL.format(username=user.username))
 
@@ -540,6 +540,7 @@ def test_user_detail(client, user, django_user_model):
         )
     )
     response = client.get(TARGET_URL, follow=True)
+
     assert response.status_code == 200
     assertContains(response, another_user.username)
     assertContains(response, another_user.first_name)

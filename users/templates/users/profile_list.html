@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
-{% for profile in profiles %}
-<a href={% url "users:user-profile" profile.user.username %}>{{profile.user.username}}</a><br>
+{% for user in users %}
+<a href={% url "users:user-profile" user.username %}>{{user.username}}</a><br>
 {% endfor %}
+<a href="{% url "echos:echo-list" %}">Volver a Echo list</a>
 {% endblock body %}

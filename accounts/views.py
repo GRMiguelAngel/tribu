@@ -43,7 +43,8 @@ def user_signup(request):
         if (form := SignupForm(request.POST)).is_valid():
             
             user = form.save()
-            Profile.objects.create(user=user)
+            profile = Profile(user=user)
+            profile.save()
 
             login(request, user)
 

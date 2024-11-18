@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% block body %}
-{{profile.user.username}}<br>
-{{profile.user.avatar}}<br>
-{{profile.user.bio}}<br><br>
+<img src="{{ detailed_user.profile.avatar.url }}" alt="Avatar"><br>
+{{detailed_user.first_name}}
+{{detailed_user.last_name}}<br>
+{{detailed_user}}<br>
+{{detailed_user.email}}<br>
+{{detailed_user.profile.bio}}<br><br>
+{% for echo in echos %}
+{{echo.content}}<br>
+{% endfor %}
+{% if user == detailed_user %}
+<a href="{% url "users:edit-profile" detailed_user %}">editar perfil</a>
+{% endif %}
+<a href="{% url "users:user-list" %}">volver a user-list</a>
+<a href="{% url "users:user-echo-profile" detailed_user %}">ver echos</a>
+
 {% endblock body %}
