@@ -511,7 +511,10 @@ def test_user_list(client, user, django_user_model):
     client.force_login(user)
     response = client.get(TARGET_URL)
     assert response.status_code == 200
+
+
     for user in users:
+        print(user)
         assertContains(response, user)
         assertContains(response, USER_DETAIL_URL.format(username=user.username))
 

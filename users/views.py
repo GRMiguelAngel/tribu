@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render
 
 from .models import Profile
@@ -14,6 +15,6 @@ def profile_list(request):
 
 @login_required
 def user_profile(request, username):
-    profile = Profile.objects.get(user=username)
-    print(profile)
-    return render(request, 'users/user_profile.html', dict(profile=profile))
+    user = User.objects.get(username=username)
+    profile = Profile.objects.get(user=user)
+    return render(request, 'users/user_profile.html', dict(profile=profile, user=user))

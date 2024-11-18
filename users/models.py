@@ -13,4 +13,4 @@ class Profile(models.Model):
     bio = models.TextField(max_length=300, blank=True, null=True,default='Biografía predeterminada.')
 
     def __str__(self):
-        return self.user.username
+        return self.user
