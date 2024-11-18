@@ -11,6 +11,6 @@ class Profile(models.Model):
         upload_to='avatars/', null=True, blank=True, default='avatars/noavatar.png'
     )
     bio = models.TextField(max_length=300, blank=True, null=True,default='Biografía predeterminada.')
-#sdkajf
+    
     def __str__(self):
         return self.user
