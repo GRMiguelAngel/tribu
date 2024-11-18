@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block body %}
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Guardar">
+</form>
+<a href="{% url "waves:wave-detail" wave.pk %}">Volver al detalle del wave</a>
+{% endblock body %}

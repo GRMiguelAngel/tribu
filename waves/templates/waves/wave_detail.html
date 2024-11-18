@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block body %}
+{{wave.user}}: {{wave.content}}
+<a href="{% url "waves:edit-wave" wave.pk %}">editar wave</a>
+<a href="{% url "waves:delete-wave" wave.pk %}">eliminar wave</a>
+{% endblock body %}

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block body %}
+{% for profile in profiles %}
+<a href={% url "users:user-profile" profile.user.username %}>{{profile.user.username}}</a><br>
+{% endfor %}
+{% endblock body %}
